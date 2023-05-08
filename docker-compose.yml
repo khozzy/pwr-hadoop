@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  namenode:
+    image: bde2020/hadoop-namenode:2.0.0-hadoop2.7.4-java8
+    container_name: namenode
+    volumes:
+      - /tmp/hdfs/namenode:/hadoop/dfs/name
+    environment:
+      - CLUSTER_NAME=pwr_hdfs
+    env_file:
+      - ./hadoop-hive.env
+    ports:
+      - "50070:50070"
+      - "8032:8032"
+    networks:
+      net_pwr:
+        ipv4_address: 172.27.1.5
+
+  datanode_1:
+    image: bde2020/hadoop-datanode:2.0.0-hadoop2.7.4-java8
+    container_name: datanode_1
+    volumes:
+      - /tmp/hdfs/datanode_1:/hadoop/dfs/data
+    env_file:
+      - ./hadoop-hive.env
+    environment:
+      SERVICE_PRECONDITION: "namenode:50070"
+      CORE_CONF_fs_defaultFS: "hdfs://namenode:8020"
+    depends_on:
+      - namenode
+    ports:
+      - "50075:50075"
+    networks:
+      net_pwr:
+        ipv4_address: 172.27.1.6
+
+networks:
+  net_pwr:
+    ipam:
+      driver: default
+      config:
+        - subnet: 172.27.0.0/16
+
