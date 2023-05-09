@@ -15,9 +15,14 @@
 
     docker-compose up
 
-    docker cp data/sales5k.csv namenode:/root
 
-    docker exec namenode hdfs dfs -mkdir -p /db/sales
     docker exec namenode hdfs dfs -ls /db/sales
-    docker exec namenode hdfs dfs -copyFromLocal /root/sales5k.csv /db/sales/
-    docker exec namenode hdfs dfs -cat /db/sales/sales5k.csv | head
+    
+    docker exec namenode hdfs dfs -cat /app-logs/root/logs-tfile/application_1683553520089_0004/7515db599cea_38477
+
+## MapReduce with Pydoop
+
+    docker run --rm --network net_pwr --env-file hadoop.env -v $(pwd)/jobs:/jobs hadoop/pydoop "ls -l /jobs"
+    docker run --rm --network net_pwr --env-file hadoop.env -v $(pwd)/jobs:/jobs hadoop/pydoop "hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar -mapper /jobs/wordcount.py -reducer /jobs/wordcount.py -file /jobs/wordcount.py"
+
+

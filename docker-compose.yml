@@ -1,3 +1,4 @@
+# https://github.com/big-data-europe/docker-hadoop
 version: '3'
 
 services:
@@ -59,11 +60,27 @@ services:
     networks:
       - net_pwr
 
+  historyserver:
+    image: bde2020/hadoop-historyserver:2.0.0-hadoop3.2.1-java8
+    container_name: historyserver
+    restart: always
+    environment:
+      SERVICE_PRECONDITION: "namenode:9000 namenode:9870 datanode_1:9864 resourcemanager:8088"
+    ports:
+      - "8188:8188"
+    volumes:
+      - historyserver:/hadoop/yarn/timeline
+    env_file:
+      - ./hadoop.env
+    networks:
+      - net_pwr
+
 volumes:
   namenode:
   datanode:
+  historyserver:
 
 networks:
   net_pwr:
-    driver: bridge
+    external: true
 
