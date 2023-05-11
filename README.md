@@ -111,7 +111,5 @@ docker run \
   "hadoop jar /jobs/wc.jar WordCount /pwr/poems/input /pwr/poems/output"
 ```
 
-### MapReduce with Pydoop
-
-    docker run --rm --network net_pwr --env-file hadoop.env -v $(pwd)/jobs:/jobs hadoop/pydoop "ls -l /jobs"
-    docker run --rm --network net_pwr --env-file hadoop.env -v $(pwd)/jobs:/jobs hadoop/pydoop "hadoop jar /opt/hadoop-3.2.1/share/hadoop/tools/lib/hadoop-streaming-3.2.1.jar -mapper /jobs/wordcount.py -reducer /jobs/wordcount.py -file /jobs/wordcount.py"
+## Exercise 4: Data Warehousing with Hive
+TBD
