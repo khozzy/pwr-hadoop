@@ -29,8 +29,6 @@ services:
     networks:
       - net_pwr
 
-  # Managing cluster resources and allocating them to different applications based on their requirements.
-  # It schedules and monitors the progress of applications, manages resource requests and allocations, and maintains a global view of cluster resources.
   resourcemanager:
     image: bde2020/hadoop-resourcemanager:2.0.0-hadoop3.2.1-java8
     container_name: resourcemanager
@@ -45,8 +43,6 @@ services:
     networks:
       - net_pwr
 
-  # Managing resources on a single node in the cluster. It launches and monitors application containers,
-  # reports resource utilization to the ResourceManager, and manages the application's lifecycle on the node.
   nodemanager_1:
     image: bde2020/hadoop-nodemanager:2.0.0-hadoop3.2.1-java8
     container_name: nodemanager_1
