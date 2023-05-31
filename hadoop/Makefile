@@ -7,8 +7,6 @@ hadoop_download:
     tar xzvf hadoop-3.2.1.tar.gz
     rm hadoop-3.2.1.tar.gz
 
-
-
 wordcount:
 	docker build -t hadoop-wordcount ./submit
 	docker run --network ${DOCKER_NETWORK} --env-file ${ENV_FILE} $(IMG) hdfs dfs -mkdir -p /input/
