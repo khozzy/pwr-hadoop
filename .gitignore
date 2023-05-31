@@ -1,3 +1,6 @@
 .idea
 hadoop/jobs/*
 !hadoop/jobs/WordCount.java
+spark/ext
+spark/.venv
+**/.ipynb_checkpoints
